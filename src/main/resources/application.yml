@@ -1,0 +1,46 @@
+logging:
+  path: /data/logs
+  #设置hwg包下的日志级别维Debug
+  level:
+    hwg: debug
+server:
+  port: 13210
+  tomcat:
+    #tomcat最大线程数
+    max-threads: 200
+spring:
+  application:
+    name: product-service
+  cloud:
+    consul:
+      discovery:
+        #是否需要将服务注册到consul 默认为true
+        register: true
+        #实例id（必须）服务名称+端口+ip地址
+        instance-id: product-service${server.port}-${spring.cloud.client.ip-address}
+        #服务名称
+        service-name: ${spring.application.name} 
+        #当前服务的ip地址（）
+        ip-address: ${spring.cloud.client.ip-address}
+        #指定开启IP地址注册，默认为true
+        prefer-ip-address: true
+      host: 127.0.0.1
+      port: 8500
+      enabled: true
+datasource:
+  #mysql驱动
+  driverClassName: com.mysql.jdbc.Driver
+  initialSize: 1
+  #最大连接池数量
+  maxActive: 20
+  #获取连接时最大等待时间，单位毫秒。配置了maxWait之后缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。
+  maxWait: 6000
+  # Destroy线程会检测连接的间隔时间，如果连接空闲时间大于等于minEvictableIdleTimeMillis则关闭物理连接 2
+  timeBetweenEvictionRunsMillis: 300000
+  url: jdbc:mysql://127.0.0.1:3306/mybatis
+  userName: root
+  password: root
+
+
+
+
