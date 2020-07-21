@@ -26,5 +26,6 @@
     </bean>
 
     <mybatis:scan base-package="hwg.dao.generate.mapper"/>
+    <mybatis:scan base-package="hwg.dao.extend.mapper"/>
 
 </beans>

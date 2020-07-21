@@ -2,7 +2,7 @@ logging:
   path: /data/logs
   #设置hwg包下的日志级别维Debug
   level:
-    hwg: debug
+    hwg: info
 server:
   port: 13210
   tomcat:
@@ -11,6 +11,19 @@ server:
 spring:
   application:
     name: product-service
+  redis:
+    host: 192.168.23.131
+    port: 6379
+    password: root
+    timeout: 6000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
   cloud:
     consul:
       discovery:
@@ -19,12 +32,12 @@ spring:
         #实例id（必须）服务名称+端口+ip地址
         instance-id: product-service${server.port}-${spring.cloud.client.ip-address}
         #服务名称
-        service-name: ${spring.application.name} 
+        service-name: ${spring.application.name}
         #当前服务的ip地址（）
         ip-address: ${spring.cloud.client.ip-address}
         #指定开启IP地址注册，默认为true
         prefer-ip-address: true
-      host: 127.0.0.1
+      host: 192.168.23.131
       port: 8500
       enabled: true
 datasource:
